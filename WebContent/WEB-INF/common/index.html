@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<link href="${basePath}insp/css/bootstrap.css" rel="stylesheet">
+<link href="${basePath}insp/css/bootstrap.min.css" rel="stylesheet">
+<link href="${basePath}insp/font-awesome/css/font-awesome.css"
+	rel="stylesheet">
+
+<!-- Toastr style -->
+
+<link href="${basePath}insp/css/bootstrap.css" rel="stylesheet">
+
+
+<!-- Gritter -->
+<link href="${basePath}insp/js/plugins/gritter/jquery.gritter.css"
+	rel="stylesheet">
+
+<link href="${basePath}insp/css/animate.css" rel="stylesheet">
+<link href="${basePath}insp/css/style.css" rel="stylesheet">
+
+<link href="${basePath}bootstrap/css/bootstrap-datetimepicker.min.css"
+	rel="stylesheet">
+<link href="${basePath}bootstrap/css/bootstrapValidator.css"
+	rel="stylesheet">
+
+</head>
+
+<body>
+	<div id="wrapper">
+		<#include "/WEB-INF/common/slide.html">
+
+
+		<div id="page-wrapper" class="gray-bg">
+			<div class="row border-bottom"><#include
+				"/WEB-INF/common/head.html"></div>
+
+			<div class="wrapper wrapper-content animated fadeIn">
+
+
+				<!-- 偏移量在修改 -->
+				<div class="col-sm-offset-0.5">
+					<!-- Example row of columns -->
+					<div class="col-md-offset-0 text-center">
+
+
+
+
+						<!-- Example row of columns -->
+						<div class="row" style="height:70px"></div>
+						
+						 <div class="row">
+                    <div class="col-lg-12">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-content">
+                                    <div>
+                                        <span class="pull-right text-right">
+                                        <small>Average value of sales in the past month in: <strong>United states</strong></small>
+                                            <br/>
+                                            All sales: 162,862
+                                        </span>
+                                        <h1 class="m-b-xs">$ 50,992</h1>
+                                        <h3 class="font-bold no-margins">
+                                            Half-year revenue margin
+                                        </h3>
+                                        <small>Sales marketing.</small>
+                                    </div>
+
+                                <div>
+                                    <canvas id="lineChart" height="70"></canvas>
+                                </div>
+
+                                <div class="m-t-md">
+                                    <small class="pull-right">
+                                        <i class="fa fa-clock-o"> </i>
+                                        Update on 16.07.2015
+                                    </small>
+                                   <small>
+                                       <strong>Analysis of sales:</strong> The value has been changed over time, and last month reached a level over $50,000.
+                                   </small>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+						
+						 <div class="row">
+
+                    <div class="col-lg-4">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <span class="label label-primary pull-right">Today</span>
+                                <h5>登陆人数</h5>
+                            </div>
+                            <div class="ibox-content">
+                                <h1 class="no-margins">${loginCount}</h1>
+                                <div class="stat-percent font-bold text-navy">${yesloginCount} <i class="fa fa-level-up"></i></div>
+                                <small>New orders</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <span class="label label-info pull-right">Today</span>
+                                <h5>下载课件次数</h5>
+                            </div>
+                            <div class="ibox-content">
+                                <h1 class="no-margins">${downloadCount}</h1>
+                                <div class="stat-percent font-bold text-info">${yesdownloadCount}<i class="fa fa-level-up"></i></div>
+                                <small>New orders</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <span class="label label-warning pull-right">Today</span>
+                                <h5>购买课件次数</h5>
+                            </div>
+                            <div class="ibox-content">
+                                <h1 class="no-margins">${buyCount}</h1>
+                                <div class="stat-percent font-bold text-warning">${yesbuyCount} <i class="fa fa-level-up"></i></div>
+                                <small>New orders</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+						
+
+					<!-- 		<div class="row">
+							<div class="col-md-6">
+							<h2 class="sub-header">今日登陆人数</h2>
+						 		<strong style="font-size:50px" color="" class="timer count-title " id="count-number"
+									data-to="${loginCount}" data-speed="1500">
+									</strong>
+									</div>
+								<div class="col-md-6"></div>
+								<h2 class="sub-header">相比昨日</h2>
+						 	
+									<strong style="font-size:50px">${yesloginCount}</strong>
+
+							</div>
+							<div class="row">
+							<div class="col-md-6">
+							<h2 class="sub-header">今日下载课件次数</h2>
+						 		<strong style="font-size:50px" color="" class="timer count-title " id="count-number"
+									data-to="${downloadCount}" data-speed="1500">
+									</strong>
+									</div>
+								<div class="col-md-6"></div>
+								<h2 class="sub-header">相比昨日</h2>
+						 	
+									<strong style="font-size:50px">${yesdownloadCount}</strong>
+
+							</div>
+												<div class="col-md-6">
+							<h2 class="sub-header">今日购买课件次数</h2>
+						 		<strong style="font-size:50px" color="" class="timer count-title " id="count-number"
+									data-to="${buyCount}" data-speed="1500">
+									</strong>
+									</div>
+								<div class="col-md-6"></div>
+								<h2 class="sub-header">相比昨日</h2>
+						 	
+									<strong style="font-size:50px">${yesbuyCount}</strong>
+ -->
+							</div>
+						</div>
+				
+
+					<!-- Example row of columns -->
+				</div>
+			
+
+			</div>
+		</div>
+	</div>
+	</div>
+
+	<!-- Mainly scripts -->
+	<script src="${basePath}insp/js/jquery-2.1.1.js"></script>
+
+	<!-- Mainly scripts -->
+	<script src="${basePath}insp/js/jquery-2.1.1.js"></script>
+	<script src="${basePath}insp/js/bootstrap.min.js"></script>
+	<script src="${basePath}insp/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+	<script src="${basePath}insp/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+	<!-- Flot -->
+	<script src="${basePath}insp/js/plugins/flot/jquery.flot.js"></script>
+	<script src="${basePath}insp/js/plugins/flot/jquery.flot.tooltip.min.js"></script>
+	<script src="${basePath}insp/js/plugins/flot/jquery.flot.spline.js"></script>
+	<script src="${basePath}insp/js/plugins/flot/jquery.flot.resize.js"></script>
+	<script src="${basePath}insp/js/plugins/flot/jquery.flot.pie.js"></script>
+	<script src="${basePath}insp/js/plugins/flot/jquery.flot.symbol.js"></script>
+	<script src="${basePath}insp/js/plugins/flot/jquery.flot.time.js"></script>
+
+	<!-- Custom and plugin javascript -->
+	<script src="${basePath}insp/js/inspinia.js"></script>
+	<script src="${basePath}js/index.js"></script>
+	<script src="${basePath}insp/js/plugins/pace/pace.min.js"></script>
+
+	<!-- Sparkline -->
+	<script src="${basePath}insp/js/plugins/sparkline/jquery.sparkline.min.js"></script>
+
+   <!-- ChartJS-->
+    <script src="${basePath}insp/js/plugins/chartJs/Chart.min.js"></script>
+
+
+	<script src="../bootstrap/js/bootstrapValidator.js"></script>
+	<script type="text/javascript" src="../js/ajaxfileupload.js"></script>
+
+
+	<script>
+		$(document).ready(
+				function() {
+					// 								Generate a simple captcha
+					function randomNumber(min, max) {
+						return Math
+								.floor(Math.random() * (max - min + 1) + min);
+					}
+					;
+					$('#captchaOperation').html(
+							[ randomNumber(1, 100), '+', randomNumber(1, 200),
+									'=' ].join(' '));
+
+					$('#searchform').bootstrapValidator({
+						// 									       live: 'disabled',
+						message : 'This value is not valid',
+						feedbackIcons : {
+							valid : 'glyphicon glyphicon-ok',
+							invalid : 'glyphicon glyphicon-remove',
+							validating : 'glyphicon glyphicon-refresh'
+						},
+						fields : {
+							imei : {
+								message : '编号长度不正确',
+								validators : {
+									stringLength : {
+										min : 15,
+										max : 15,
+										message : '编号长度由15位字母和数字组成。'
+									},
+									remote : {
+										type : "post",
+										url : 'validatorDeviceIDSearch',
+										message : '设备编号不存在，请重新输入设备编号。',
+										delay : 2000
+									},
+									regexp : {
+										regexp : /^[a-zA-Z0-9_\.]+$/,
+										message : '编号由字母和数字组成,不支持其它字符。'
+									}
+
+								}
+							}
+						}
+					});
+
+					$('#resetBtn').click(
+							function() {
+								$('#searchform').data('bootstrapValidator')
+										.resetForm(true);
+							});
+							
+							 var lineData = {
+                labels: ["January", "February", "March", "April", "May", "June", "July"],
+                datasets: [
+                    {
+                        label: "Example dataset",
+                        fillColor: "rgba(220,220,220,0.5)",
+                        strokeColor: "rgba(220,220,220,1)",
+                        pointColor: "rgba(220,220,220,1)",
+                        pointStrokeColor: "#fff",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(220,220,220,1)",
+                        data: [65, 59, 80, 81, 56, 55, 40]
+                    },
+                    {
+                        label: "Example dataset",
+                        fillColor: "rgba(26,179,148,0.5)",
+                        strokeColor: "rgba(26,179,148,0.7)",
+                        pointColor: "rgba(26,179,148,1)",
+                        pointStrokeColor: "#fff",
+                        pointHighlightFill: "#fff",
+                        pointHighlightStroke: "rgba(26,179,148,1)",
+                        data: [28, 48, 40, 19, 86, 27, 90]
+                    }
+                ]
+            };
+
+            var lineOptions = {
+                scaleShowGridLines: true,
+                scaleGridLineColor: "rgba(0,0,0,.05)",
+                scaleGridLineWidth: 1,
+                bezierCurve: true,
+                bezierCurveTension: 0.4,
+                pointDot: true,
+                pointDotRadius: 4,
+                pointDotStrokeWidth: 1,
+                pointHitDetectionRadius: 20,
+                datasetStroke: true,
+                datasetStrokeWidth: 2,
+                datasetFill: true,
+                responsive: true,
+            };
+
+
+            var ctx = document.getElementById("lineChart").getContext("2d");
+            var myNewChart = new Chart(ctx).Line(lineData, lineOptions);
+
+							
+				});
+
+		function dataFormSearch(nextPageNumber) {
+
+			$("#pageNumber").val(nextPageNumber);//设置下一页的号码  然后随表单提交到后台
+
+			jQuery.ajax({
+				url : 'deviceSearch',
+				data : $('#searchform').serialize(),
+				type : "POST",
+				success : function(data) {
+
+					afterDeviceSearch(data);
+
+				}
+			});
+			return false;
+		}
+	</script>
+	<!--底部分页的 -->
+
+
+</body>
+</html>

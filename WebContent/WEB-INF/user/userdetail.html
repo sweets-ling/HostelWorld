@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+
+<html style="height: 239px; ">
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="${basePath}insp/css/bootstrap.css" rel="stylesheet">
+<link href="${basePath}insp/css/bootstrap.min.css" rel="stylesheet">
+<link href="${basePath}insp/font-awesome/css/font-awesome.css" rel="stylesheet">
+	
+
+</head>
+<body>
+	<div class="table-responsive">
+	<table class="table table-bordered">
+	<tbody>
+					<tr>
+					<td class="col-md-2">
+						登录名
+						</td>
+						<td>
+							${node.lgnname}
+						</td>
+					</tr>
+					<tr>
+					<td>
+						昵称
+						</td>
+						<td>
+							${node.nickname}
+						</td>
+					</tr>      
+					<tr >
+						<td>
+							性别
+						</td>
+						<td>
+							<#if node.sex> 男<#else> 女</#if>
+						</td>
+					</tr>
+					<tr >
+						<td>
+							密码
+						</td>
+						<td>
+							${node.password}
+						</td>
+					</tr>
+					<tr >
+						<td>
+							籍贯
+						</td>
+						<td>
+							${node.city}
+						</td>
+					</tr>
+					<tr >
+						<td>
+							地址
+						</td>
+						<td>
+							${node.address}
+						</td>
+					</tr>
+					<tr >
+						<td>
+							注册时间
+						</td>
+						<td>
+							${node.rejectTime}
+						</td>
+					</tr>
+						<tr >
+						<td>
+							翻译到期时间
+						</td>
+						<td>
+							${node.transDate}
+						</td>
+					</tr>
+						<tr >
+						<td>
+							最后登录时间
+						</td>
+						<td>
+							${node.loginTime}
+						</td>
+					</tr>
+						<tr >
+						<td>
+							状态
+						</td>
+						<td>
+							<#if node.isValid> 正常<#else> 封杀</#if>
+						</td>
+					</tr>
+					
+					
+					
+							</tbody>
+</table>
+</div>
+</div>
+	<script src="${basePath}insp/js/jquery-2.1.1.js"></script>
+	<script src="${basePath}insp/js/bootstrap.min.js"></script>
+	<script src="${basePath}js/audioplayer.js"></script>
+	
+	<script src="${basePath}layer/layer.js"></script>
+
+
+	
+	
+	<script>
+	;!function(){
+
+//页面一打开就执行，放入ready是为了layer所需配件（css、扩展模块）加载完毕
+layer.ready(function(){ 
+   
+    //使用相册
+    layer.photos({
+        photos: '#photosDemo'
+    });
+	});
+	}();
+	
+	
+	
+	function saveAnswer() {  
+	    // jquery 表单提交 
+	    $.post("answer",{id:$("#aid").val(),answer:$("#answer").val()} ,
+	    
+	    function(data){
+	    	/////
+   			alert(data)
+	    	 }
+	    
+	    );
+
+   
+        return false; // 阻止表单自动提交事件
+
+	}  
+	
+	</script>
+
+</body>
+</html>

@@ -1,0 +1,4 @@
+jdbcUrl = jdbc:mysql://115.28.33.208:3306/min_language?characterEncoding=utf8&zeroDateTimeBehavior=convertToNull
+user = ykk2
+password = 123qwe
+devMode = true

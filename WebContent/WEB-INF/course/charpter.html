@@ -1,0 +1,132 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>章节管理</title>
+<link href="${basePath}insp/css/bootstrap.css" rel="stylesheet">
+<link href="${basePath}bootstrap/css/bootstrap-table.css" rel="stylesheet">
+<link href="${basePath}insp/css/bootstrap.min.css" rel="stylesheet">
+<link href="${basePath}insp/font-awesome/css/font-awesome.css" rel="stylesheet">
+<!-- Toastr style -->
+<link href="${basePath}insp/css/plugins/toastr/toastr.min.css" rel="stylesheet">
+<!-- Gritter -->
+<link href="${basePath}insp/js/plugins/gritter/jquery.gritter.css" rel="stylesheet">
+<link href="${basePath}insp/css/animate.css" rel="stylesheet">
+<link href="${basePath}insp/css/style.css" rel="stylesheet">
+<link href="${basePath}bootstrap/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+<link href="${basePath}bootstrap/css/bootstrapValidator.css" rel="stylesheet">
+</head>
+<body>
+	<div id="wrapper">
+		<#include "/WEB-INF/common/slide.html">
+		<div id="page-wrapper" class="gray-bg">
+			<div class="row border-bottom"><#include "/WEB-INF/common/head.html"></div>
+			<div class="wrapper wrapper-content animated fadeIn">
+				<!-- 偏移量在修改 -->
+				<div class="col-sm-offset-0.5">
+					<!-- Example row of columns -->
+					<h2 class="sub-header">
+					<a href="charpterList?cid=${cid}">${cname}</a>
+					</h2>
+					<hr>
+					<!-- 导入Excel文件  直接提交到后台服务器，执行完成后刷新当前页-->
+					<form id="uploadExcelChapter" method="post" class="form-horizontal" enctype="multipart/form-data" action="uploadExcelChapter">
+						<div class="form-group">
+							<div class="col-md-4">
+								<input type="hidden" id="cid" name="cid" value="${cid}">
+								<!-- 							cid顺序要在这个form前面 -->
+								<input id="fileToUpload" type="file" width="200px" style="display: none;" name="fileToUpload" class="input" onchange="img1.value=value"> <input name="img1"
+									id="img1" value="${data.img1}" style="color: green;border: 1px solid green"
+								> <input type=button value="Excel" onclick=fileToUpload.click() style="border: 1px solid green"> <input type="submit" value="导入" style="border: 1px solid green">
+							</div>
+							<!-- 							<input type="text" id="cid" value="${cid}"> -->
+							<div class="col-md-7"></div>
+						</div>
+					</form>
+					<form id="downExcel" method="post" class="form-horizontal" action="downExcel">
+						<div class="form-group">
+							<div class="col-md-4">
+								<input type="hidden" id="kind" name="kind" value="1"> 
+								<input type="hidden" id="cid" name="cid" value="${cid}"> 
+								<input type="submit" value="下载Excel" style="border: 1px solid green">
+							</div>
+						</div>
+					</form>
+					<table id="table" data-toggle="table" data-toolbar="#toolbar" data-height="460" data-url="../json/data1.json">
+						<thead>
+							<tr>
+								<th data-field="name">编号</th>
+								<th data-field="price">名称</th>
+								<th data-field="operation">操作</th>
+							</tr>
+						</thead>
+						<tbody>
+							<#list rows as row>
+							<tr>
+								<#list row as data> <#if data_index gt 3 >
+								<td>${data}</td> </#if> </#list>
+								<td><a href="${basePath}course/sectionList?cid=${row[1]}&&chapter=${row[2]}"><span class="glyphicon glyphicon-share"></span></a> &nbsp;</td>
+							</tr>
+							</#list>
+						</tbody>
+					</table>
+				</div>
+			</div>
+			<#include "/WEB-INF/common/footer.html">
+		</div>
+	</div>
+	<!-- Mainly scripts -->
+	<script src="${basePath}insp/js/jquery-2.1.1.js"></script>
+	<!-- Mainly scripts -->
+	<script src="${basePath}insp/js/jquery-2.1.1.js"></script>
+	<script src="${basePath}bootstrap/js/bootstrap.js"></script>
+	<script src="${basePath}bootstrap/js/bootstrap-table.js"></script>
+	<script src="${basePath}insp/js/bootstrap.min.js"></script>
+	<script src="${basePath}insp/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+	<script src="${basePath}insp/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+	<!-- Flot -->
+	<script src="${basePath}insp/js/plugins/flot/jquery.flot.js"></script>
+	<script src="${basePath}insp/js/plugins/flot/jquery.flot.tooltip.min.js"></script>
+	<script src="${basePath}insp/js/plugins/flot/jquery.flot.spline.js"></script>
+	<script src="${basePath}insp/js/plugins/flot/jquery.flot.resize.js"></script>
+	<script src="${basePath}insp/js/plugins/flot/jquery.flot.pie.js"></script>
+	<script src="${basePath}insp/js/plugins/flot/jquery.flot.symbol.js"></script>
+	<script src="${basePath}insp/js/plugins/flot/jquery.flot.time.js"></script>
+	<!-- Custom and plugin javascript -->
+	<script src="${basePath}insp/js/inspinia.js"></script>
+	<script src="${basePath}insp/js/plugins/pace/pace.min.js"></script>
+	<!-- Sparkline -->
+	<script src="${basePath}insp/js/plugins/sparkline/jquery.sparkline.min.js"></script>
+	<script type="text/javascript" src="../bootstrap/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+	<script type="text/javascript" src="../bootstrap/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+	<script type="text/javascript" src="../bootstrap/js/locales/bootstrap-table-zh-CN.js" charset="UTF-8"></script>
+	<script src="../bootstrap/js/bootstrapValidator.js"></script>
+	<script src="../bootstrap/js/province-city-country.js"></script>
+	<script>
+		var $table = $('#table'), $button = $('#button');
+
+		$(function() {
+			$button.click(function() {
+				$table.bootstrapTable('append', randomData());
+				$table.bootstrapTable('scrollTo', 'bottom');
+			});
+		});
+
+		function randomData() {
+			var startId = ~~(Math.random() * 100), rows = [];
+
+			for (var i = 0; i < 10; i++) {
+				rows.push({
+					id : startId + i,
+					name : 'test' + (startId + i),
+					price : '$' + (startId + i)
+				});
+			}
+			return rows;
+		}
+	</script>
+	<!--底部分页的 -->
+</body>
+</html>

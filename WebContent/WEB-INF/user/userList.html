@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<link href="${basePath}insp/css/bootstrap.css" rel="stylesheet">
+
+
+<link href="${basePath}insp/css/bootstrap.min.css" rel="stylesheet">
+<link href="${basePath}insp/font-awesome/css/font-awesome.css" rel="stylesheet">
+
+<!-- Toastr style -->
+<link href="${basePath}insp/css/plugins/toastr/toastr.min.css" rel="stylesheet">
+
+<!-- Gritter -->
+<link href="${basePath}insp/js/plugins/gritter/jquery.gritter.css" rel="stylesheet">
+
+<link href="${basePath}insp/css/animate.css" rel="stylesheet">
+<link href="${basePath}insp/css/style.css" rel="stylesheet">
+
+<link href="${basePath}bootstrap/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+<link href="${basePath}bootstrap/css/bootstrapValidator.css" rel="stylesheet">
+
+</head>
+
+<body>
+	<div id="wrapper">
+		<#include "/WEB-INF/common/slide.html">
+
+		<div id="page-wrapper" class="gray-bg">
+			<div class="row border-bottom"><#include "/WEB-INF/common/head.html"></div>
+
+			<div class="wrapper wrapper-content animated fadeIn">
+
+
+				<!-- 偏移量在修改 -->
+				<div class="col-sm-offset-0.5">
+					<!-- Example row of columns -->
+					<div class="col-md-offset-0">
+
+						<!-- Example row of columns -->
+						<div class="row">
+
+							<div class="col-md-12">					
+								<div class="row" style="height:20px; margin-top: 30px">
+									<div class="col-md-4">
+										<h2 class="sub-header" style="margin-top: 0px">${title}</h2>
+									</div>
+
+									<div class="col-md-4 col-md-offset-4">
+										<form  method="post" class="form-search form-inline"  action="">
+											<input  id="keyword" class="input-medium search-query" type="text" value="${keyword}" name="keyword"/>
+											<button type="button"  id="searchform" class="btn" >查找</button>
+										</form>
+									</div>
+								</div>
+
+								<hr>
+
+								<div class="table-responsive">
+									<table class="table table-hover" id="device-list">
+										<thead>
+											<tr>
+												<th>编号</th>
+												<th>登录名</th>
+												<th>昵称</th>
+												<th>密码</th>
+												<th>性别</th>
+												<th>籍贯</th>
+												<th>住址</th>
+												<th>翻译服务</th>
+												<th>提问数量</th>
+												<th>注册时间</th>
+												<th>最后登录时间</th>
+												<th>有效状态</th>
+											</tr>
+										</thead>
+										<tbody>
+										<#list userList.getList() as x>
+										<tr class="user_node" id=${x.id}">
+									    <td style="text-align:left;"  >${x_index+1+pageSize*(pageNumber-1)}</td>
+										<td style="text-align:left;"  >${x.lgnname}</td>
+										<td style="text-align:left;"  >${x.nickname}</td>
+										<td style="text-align:left;"  >${x.password}</td>
+										<td style="text-align:left;"  ><#if x.sex> 男<#else> 女</#if> </td>
+										<td style="text-align:left;" >${x.city}</td>
+										<td style="text-align:left;"  > 
+										<#if x.address?length lt 10>   
+										${x.address}
+										<#else> 
+    									${x.address[0..8]}... 
+										</#if>									
+										</td>
+										<td style="text-align:left;"  >${x.transDate?date}</td>
+										<td style="text-align:left;"  >${x.qstNum}</td>
+										<td style="text-align:left;"  >${x.rejectTime?date}</td>
+										<td style="text-align:left;"  >${x.loginTime}</td>
+										<td class="not_node" style="text-align:left;"><p><b>${state[type]}</b><a class="user_state" href="#" id="${x.id}" state="${type}" >&nbsp&nbsp修改</a></p> </td>
+										
+									
+										</td>
+										</tr>
+										</#list>
+									
+										</tbody>
+									</table>
+									</div>
+								</div> 
+							</div>
+							</div>
+						</div>
+					</div>
+
+			<#include "/WEB-INF/common/pageControl.html"> 
+			<#include "/WEB-INF/common/footer.html">		
+
+				</div>
+			</div>
+		</div>
+
+
+
+
+	<!-- Mainly scripts -->
+	<script src="${basePath}insp/js/jquery-2.1.1.js"></script>
+
+	<!-- Mainly scripts -->
+	<script src="${basePath}insp/js/jquery-2.1.1.js"></script>
+	<script src="${basePath}insp/js/bootstrap.min.js"></script>
+	<script src="${basePath}insp/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+	<script src="${basePath}insp/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+
+	<!-- Flot -->
+	<script src="${basePath}insp/js/plugins/flot/jquery.flot.js"></script>
+	<script src="${basePath}insp/js/plugins/flot/jquery.flot.tooltip.min.js"></script>
+	<script src="${basePath}insp/js/plugins/flot/jquery.flot.spline.js"></script>
+	<script src="${basePath}insp/js/plugins/flot/jquery.flot.resize.js"></script>
+	<script src="${basePath}insp/js/plugins/flot/jquery.flot.pie.js"></script>
+	<script src="${basePath}insp/js/plugins/flot/jquery.flot.symbol.js"></script>
+	<script src="${basePath}insp/js/plugins/flot/jquery.flot.time.js"></script>
+
+	<!-- Custom and plugin javascript -->
+	<script src="${basePath}insp/js/inspinia.js"></script>
+	<script src="${basePath}insp/js/plugins/pace/pace.min.js"></script>
+
+	<!-- Sparkline -->
+	<script src="${basePath}insp/js/plugins/sparkline/jquery.sparkline.min.js"></script>
+
+	<!-- layer 弹出层 -->
+	<script src="${basePath}layer/layer.js"></script>
+
+
+	<script type="text/javascript" src="../bootstrap/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+	<script type="text/javascript" src="../bootstrap/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+	<script src="../bootstrap/js/bootstrapValidator.js"></script>
+	<script src="../bootstrap/js/province-city-country.js"></script>
+	<script src="../js/techofpurity.js"></script>
+
+
+	<script>
+ 
+    
+  
+    
+    $(".user_state").click(function(e){
+    	
+    	
+    	$.get("../user/changeState?id="+$(this).attr("id")+"&state="+$(this).attr("state"),function(data){
+    		
+    		if(data["result"][0]=="OK")
+    		{	
+    			
+    			
+    			if(data["result"][1]=="1")
+    				{
+    				$(".user_state#"+data["result"][2]).attr("state","0");
+    				$(".user_state#"+data["result"][2]).parent().children("b").text("封杀");
+    				}
+    			else
+    				{
+    				$(".user_state#"+data["result"][2]).attr("state","1");
+    				$(".user_state#"+data["result"][2]).parent().children("b").text("正常");
+    				
+    				}
+    		}
+    		else
+    			{
+    			alert("修改失败！");
+    			}
+    		
+    		
+    	});
+
+    	e.stopPropagation();//阻止冒泡 
+    });
+    
+    
+    $(".user_node").click(function(){
+		
+		 var id=$(this).attr("id");
+		    layer.open({
+		        type: 2,
+		        //skin: 'layui-layer-lan',
+		        title: '用户详情',
+		        fix: false,
+		        shadeClose: true,
+		        maxmin: true,
+		        area: ['600px', '500px'],
+		        content: '../user/userdetail?id='+id,
+		        end: function(){
+		            
+		        }
+		    
+		    });
+		   
+		    
+   });
+    
+    $("#searchform").click(function(){
+		
+		 var keyword=$("#keyword").val();
+		    if(keyword!="")
+		    {
+		    	if (window.location.href.indexOf("?") != -1) {
+		    	
+		    		var url = window.location.href.split("?")[0];
+		    	
+		    	}
+		    	else
+		    		var url = window.location.href;
+		    	window.location.href=url+"?keyword="+keyword;
+		    }
+		   
+		    
+  });
+    
+	</script>
+
+</body>
+</html>

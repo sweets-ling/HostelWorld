@@ -1,0 +1,119 @@
+
+
+
+<!DOCTYPE html>
+
+<html style="height: 239px; ">
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="${basePath}insp/css/bootstrap.css" rel="stylesheet">
+<link href="${basePath}insp/css/bootstrap.min.css" rel="stylesheet">
+<link href="${basePath}insp/font-awesome/css/font-awesome.css" rel="stylesheet">
+	
+
+</head>
+<body>
+	<div class="col-md-6"><h2 class="sub-header">客服</h2>
+	<hr>
+
+	<div class="table-responsive">
+	<form id="updateAnswerform" method="post" class="form-horizontal" action="#" onsubmit="return saveAdmin();" style="width: 307px; "> 		
+                           
+                           
+                    <table class="table table-bordered">
+					<tbody>
+                           <tr>
+					<td class="col-md-2">
+						登录名
+						</td>
+						<td>
+						<#if  node??>
+							${node.lgnname}
+						<#else>
+						   <input type="text" id="name" value="" />
+						</#if>
+						</td>
+					</tr>
+					<tr >
+						<td>
+							密码
+						</td>
+						<td>
+							 <input type="text" id="pwd" value="${node.password}" />
+						</td>
+					</tr>
+					<tr>
+						<td>
+							翻译类型
+						</td>
+						<td>
+							<select id="transType">  
+								 <option value ="0" <#if node.transType==0> selected="selected" </#if> >老挝-汉语</option>  
+								 <option value ="1" <#if node.transType==1> selected="selected" </#if> >泰语-汉语</option>  
+							</select> 
+						</td>
+
+					</tr>
+					
+					<tr>
+						<td>
+							服务类型
+						</td>
+						<td>
+							<select id="type">  
+								 <option value ="0" <#if node.type==0> selected="selected" </#if> >管理员</option>  
+								 <option value ="1" <#if node.type==1> selected="selected" </#if> >客服</option>  
+							</select> 
+						</td>
+
+					</tr>
+                            
+
+							</tbody>
+</table>
+							<div class="col-md-10" ">
+						       <input type="hidden" id="aid" name="aid" value="${node.id}" />
+							   <input type="submit" value="提交" />
+								
+							</div >		
+</form>
+</div>
+</div>
+	<script src="${basePath}insp/js/jquery-2.1.1.js"></script>
+	<script src="${basePath}insp/js/bootstrap.min.js"></script>
+	<script src="${basePath}js/audioplayer.js"></script>
+	
+	<script src="${basePath}layer/layer.js"></script>
+
+
+	
+	
+	<script>
+	function saveAdmin() {  
+	    // jquery 表单提交 
+	    <#if node??>
+	    $.post("update",{id:$("#aid").val(),pwd:$("#pwd").val(),type:$("#type").val(),"transType":$("#transType").val()} ,
+	    <#else>
+	    $.post("add",{name:$("#name").val(),pwd:$("#pwd").val(),type:$("#type").val(),"transType":$("#transType").val()} ,
+	    </#if>
+	    
+	    function(data){
+	    	/////
+			window.opener=null;  
+    		window.open('','_self');  
+    		window.close();
+			alert(data);
+	    	
+	    	 }
+	    
+	    ); 
+        return false; // 阻止表单自动提交事件
+
+	}  
+	
+	</script>
+
+</body>
+</html>

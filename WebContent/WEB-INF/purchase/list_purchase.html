@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<link href="${basePath}insp/css/bootstrap.css" rel="stylesheet">
+
+
+<link href="${basePath}insp/css/bootstrap.min.css" rel="stylesheet">
+<link href="${basePath}insp/font-awesome/css/font-awesome.css" rel="stylesheet">
+
+<!-- Toastr style -->
+
+<link href="${basePath}insp/css/bootstrap.css" rel="stylesheet">
+<link href="http://cdn.datatables.net/plug-ins/28e7751dbec/integration/bootstrap/3/dataTables.bootstrap.css" rel="stylesheet">
+
+<!-- Gritter -->
+<link href="${basePath}insp/js/plugins/gritter/jquery.gritter.css" rel="stylesheet">
+
+<link href="${basePath}insp/css/animate.css" rel="stylesheet">
+<link href="${basePath}insp/css/style.css" rel="stylesheet">
+
+<link href="${basePath}bootstrap/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+<link href="${basePath}bootstrap/css/bootstrapValidator.css" rel="stylesheet">
+
+</head>
+
+<body>
+	<div id="wrapper">
+		<#include "/WEB-INF/common/slide.html">
+
+
+		<div id="page-wrapper" class="gray-bg">
+			<div class="row border-bottom"><#include "/WEB-INF/common/head.html"></div>
+
+			<div class="wrapper wrapper-content animated fadeIn">
+
+
+				<!-- 偏移量在修改 -->
+				<div class="col-sm-offset-0.5">
+					<!-- Example row of columns -->
+					<div class="col-md-offset-0">
+						<!-- Example row of columns -->
+						<div class="row">
+							<div class="col-md-12">
+								<div class="row">
+									<h2 class="sub-header">购买列表</h2>
+									<hr>
+								</div>
+								<div class="row">
+									<form id="searchform" method="post" class="form-horizontal" action="searchReport">
+										<div class="form-group">
+											<label for="member" class="col-md-1 control-label">用户名</label>
+											<div class="col-md-4">
+												<input name="name" type="text" value="${name}" class="form-control" id="name">
+											</div>
+											<div class="col-md-7"></div>
+											<div class="form-group">
+												<label for="company_type" class="col-md-1 control-label">操作员</label>
+												<div class="col-md-4">
+													<select class="form-control" id="operator" name="operator">
+														<option selected="selected">--请选择--</option> <#list operators as a> <#if operator.equals(a.lgnname)>
+														<option selected="selected">${a.lgnname}</option> <#else>
+														<option>${a.lgnname}</option> </#if> </#list>
+
+													</select>
+												</div>
+												<div class="col-md-7"></div>
+											</div>
+
+										</div>
+
+										<div class="form-group row">
+											<div class="col-md-5">
+												<label for="start_date" class="col-md-2 control-label" style="padding-right: 0px; padding-left: 0px;    text-align:left;">开始日期</label>
+												<div class="input-group date form_date col-md-8" data-date="" data-date-format="yyyy-mm-dd" data-link-field="start_date"
+													data-link-format="yyyy-mm-dd" style="padding-left: 21px;">
+													<input class="form-control" type="text" id="start_date" name="start_date" value="${start_date}" readonly> <span
+														class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span> <span class="input-group-addon"><span
+														class="glyphicon glyphicon-calendar"></span></span>
+												</div>
+												<input type="hidden" id="start_date_value" value="" />
+											</div>
+
+
+											<div class="col-md-5">
+												<label for="end_date" class="col-md-2 control-label" style="padding-right: 0px; padding-left: 0px;    text-align:left;">结束日期</label>
+												<div class="input-group date form_date col-md-8" data-date="" data-date-format="yyyy-mm-dd" data-link-field="end_date"
+													data-link-format="yyyy-mm-dd" style="padding-left: 21px;">
+													<input class="form-control" type="text" id="end_date" name="end_date" value="${end_date}" readonly> <span
+														class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span> <span class="input-group-addon"><span
+														class="glyphicon glyphicon-calendar"></span></span>
+												</div>
+												<input type="hidden" id="end_date_value" value="" />
+
+											</div>
+
+											<div class="col-md-2"></div>
+											<div class="form-group">
+												<div class="col-md-1">
+													<button type="submit" id="searchbutton" class="btn btn-primary">查询</button>
+
+												</div>
+											</div>
+										</div>
+									</form>
+
+									<div class="table-responsive">
+										<table class="table table-hover" id="table">
+											<thead>
+												<tr>
+													<th>用户名</th>
+													<th>购买内容</th>
+													<th>时间</th>
+													<th>支付类型</th>
+													<th>单号/激活码</th>
+													<th>操作员</th>
+													<th>支付成功</th>
+													<th class="text-danger">设置失效</th>
+
+												</tr>
+											</thead>
+											<tbody>
+												<#list data.getList() as x>
+												<tr>
+													<#if x.isActive == 1> 
+                                                        <!-- 1支付成功 2 表示支付失败 -->
+
+
+													<td style="text-align:left;">${x.name}</td>
+													<td style="text-align:left;">${x.course}${x.description}</td>
+													<td style="text-align:left;">${x.time}</td>
+													<td style="text-align:left;">${x.type}${x.channel}</td>
+													<#if x.type == "激活码">
+													<td style="text-align:left;"><a name="copy"class="copy"  data-clipboard-target="fe_text" onclick="showcode('${x.payid}')">${x.payid.substring(0,10)}...</a></td>
+				<textarea id="fe_text" class="hidden" value="${x.payid}"></textarea>
+</body>	
+													<#else>
+													<td style="text-align:left;">${x.payid}</td>
+													</#if>
+													
+													<td style="text-align:left;">${x.operator}</td>						
+													<td style="text-align:left;">是</td>
+													
+
+													<td><a href="${basePath}purchase/remove?user=${x.name}&course=${x.course}"><span class="glyphicon glyphicon-remove"></span></a>
+														&nbsp;</td> 
+														<#else>
+                                                        <!-- 1支付成功 2 表示支付失败 -->
+
+													<td class="text-danger" style="text-align:left;"><s>${x.name}</s></td>
+													<td class="text-danger" style="text-align:left;"><s>${x.course}${x.description}</s></td>
+													<td class="text-danger" style="text-align:left;"><s>${x.time}</s></td>
+													<td class="text-danger" style="text-align:left;"><s>${x.type}${x.channel}</s></td>
+													<#if x.type == "激活码">
+													<td class="text-danger" style="text-align:left;" data-toggle="tooltip" title=${x.payid}>${x.payid.substring(0,10)}...</td>				
+													<#else>
+													<td class="text-danger" style="text-align:left;">${x.payid}</td>
+													</#if>
+													
+													<td class="text-danger" style="text-align:left;"><s>${x.operator}</s></td>
+													<td class="text-danger" style="text-align:left;"><s>否</s></td>
+ 
+<!-- 													<td><a href="${basePath}purchase/recover?user=${x.name}&course=${x.course}"><span class="glyphicon glyphicon-ok"></span></a> &nbsp;</td> -->
+													</#if>
+
+												</tr>
+												</#list>
+
+											</tbody>
+										</table>
+
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<!-- Example row of columns -->
+					</div>
+
+					<#include "/WEB-INF/common/pageControlSpecial.html"> <#include "/WEB-INF/common/footer.html">
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Mainly scripts -->
+	<script src="${basePath}insp/js/jquery-2.1.1.js"></script>
+
+	<!-- Mainly scripts -->
+	<script src="${basePath}insp/js/jquery-2.1.1.js"></script>
+	<script src="${basePath}insp/js/bootstrap.min.js"></script>
+	<script src="${basePath}insp/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+	<script src="${basePath}insp/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+	<!-- Flot -->
+	<script src="${basePath}insp/js/plugins/flot/jquery.flot.js"></script>
+	<script src="${basePath}insp/js/plugins/flot/jquery.flot.tooltip.min.js"></script>
+	<script src="${basePath}insp/js/plugins/flot/jquery.flot.spline.js"></script>
+	<script src="${basePath}insp/js/plugins/flot/jquery.flot.resize.js"></script>
+	<script src="${basePath}insp/js/plugins/flot/jquery.flot.pie.js"></script>
+	<script src="${basePath}insp/js/plugins/flot/jquery.flot.symbol.js"></script>
+	<script src="${basePath}insp/js/plugins/flot/jquery.flot.time.js"></script>
+
+	<!-- Custom and plugin javascript -->
+	<script src="${basePath}insp/js/inspinia.js"></script>
+	<script src="${basePath}insp/js/plugins/pace/pace.min.js"></script>
+
+	<!-- Sparkline -->
+	<script src="${basePath}insp/js/plugins/sparkline/jquery.sparkline.min.js"></script>
+
+
+
+
+	<script type="text/javascript" src="../bootstrap/js/bootstrap-datetimepicker.js" charset="UTF-8"></script>
+	<script type="text/javascript" src="../bootstrap/js/locales/bootstrap-datetimepicker.zh-CN.js" charset="UTF-8"></script>
+	<script src="../bootstrap/js/bootstrapValidator.js"></script>
+	<script src="../bootstrap/js/province-city-country.js"></script>
+
+
+
+
+	<!-- 	<script type="text/javascript"> -->
+
+
+
+	<!-- 	alert(encodeURl("我是中文"))； -->
+
+	<!-- </script> -->
+
+
+	<script type="text/javascript">
+		$('.form_date').datetimepicker({
+			language : 'zh-CN',
+			weekStart : 1,
+			todayBtn : 1,
+			autoclose : 1,
+			todayHighlight : 1,
+			startView : 2,
+			minView : 2,
+			forceParse : 0
+		});//时间选择器的配置
+	</script>
+
+	<script>
+		$(document).ready(
+				function() {
+					// 								Generate a simple captcha
+					function randomNumber(min, max) {
+						return Math
+								.floor(Math.random() * (max - min + 1) + min);
+					}
+					;
+					$('#captchaOperation').html(
+							[ randomNumber(1, 100), '+', randomNumber(1, 200),
+									'=' ].join(' '));
+
+					$('#searchform').bootstrapValidator({
+						// 									       live: 'disabled',
+						message : 'This value is not valid',
+						feedbackIcons : {
+							valid : 'glyphicon glyphicon-ok',
+							invalid : 'glyphicon glyphicon-remove',
+							validating : 'glyphicon glyphicon-refresh'
+						},
+						fields : {
+							imei : {
+								message : '编号长度不正确',
+								validators : {
+									stringLength : {
+										min : 15,
+										max : 15,
+										message : '编号长度由15位字母和数字组成。'
+									},
+									remote : {
+										type : "post",
+										url : 'validatorDeviceIDSearch',
+										message : '设备编号不存在，请重新输入设备编号。',
+										delay : 2000
+									},
+									regexp : {
+										regexp : /^[a-zA-Z0-9_\.]+$/,
+										message : '编号由字母和数字组成,不支持其它字符。'
+									}
+
+								}
+							}
+						}
+					});
+
+					$('#resetBtn').click(
+							function() {
+								$('#searchform').data('bootstrapValidator')
+										.resetForm(true);
+							});
+				});
+
+		function dataFormSearch(nextPageNumber) {
+
+			$("#pageNumber").val(nextPageNumber);//设置下一页的号码  然后随表单提交到后台
+
+			jQuery.ajax({
+				url : 'deviceSearch',
+				data : $('#searchform').serialize(),
+				type : "POST",
+				success : function(data) {
+
+					afterDeviceSearch(data);
+
+				}
+			});
+			return false;
+		}
+	</script>
+	<!--底部分页的 -->
+	
+	<script type="text/javascript">
+	(function ($) {
+		  'use strict';
+
+		  var DelayTooltip = function (element, options) {
+		    this.init('delayTooltip', element, options);
+			this.initDelayTooltip();
+		  };
+
+		  if (!$.fn.tooltip) throw new Error('Popover requires tooltip.js');
+
+		  DelayTooltip.VERSION  = '0.1';
+
+		  DelayTooltip.DEFAULTS = $.extend({}, $.fn.tooltip.Constructor.DEFAULTS, {
+		    trigger: 'hover',
+			delay: {hide: 300}
+		  });
+
+		  DelayTooltip.prototype = $.extend({}, $.fn.tooltip.Constructor.prototype);
+
+		  DelayTooltip.prototype.constructor = DelayTooltip;
+
+		  DelayTooltip.prototype.getDefaults = function () {
+		    return DelayTooltip.DEFAULTS;
+		  };
+			
+			DelayTooltip.prototype.delayTooltipEnter = function(){
+				this.hoverState = 'in';
+			};
+			
+			DelayTooltip.prototype.delayTooltipLeave = function(){
+				this.hoverState = 'out';
+				this.leave(this);
+			};
+				
+		  DelayTooltip.prototype.initDelayTooltip = function(){
+			  this.tip()
+				  .on('mouseenter.'  +  this.type, $.proxy(this.delayTooltipEnter, this))
+		          .on('mouseleave.' + this.type, $.proxy(this.delayTooltipLeave, this));
+		  };
+			
+		  function Plugin(option) {
+		    return this.each(function () {
+		      var $this   = $(this);
+		      var data    = $this.data('bs.delayTooltip');
+		      var options = typeof option == 'object' && option;
+
+		      if (!data && /destroy|hide/.test(option)) return;
+		      if (!data) $this.data('bs.delayTooltip', (data = new DelayTooltip(this, options)));
+		      if (typeof option == 'string') data[option]();
+		    });
+		  }
+
+		  var old = $.fn.delayTooltip;
+
+		  $.fn.delayTooltip             = Plugin;
+		  $.fn.delayTooltip.Constructor = DelayTooltip;
+
+		  $.fn.delayTooltip.noConflict = function () {
+		    $.fn.delayTooltip = old;
+		    return this;
+		  };
+
+		})(jQuery);
+
+		//测试代码
+		(function(global, $){
+		  
+			var page = function(){
+			  
+			};
+			
+			page.prototype.bootstrap = function(payid){
+				var html = payid+'<a target="_blank" href="#">copy</a>';
+			
+				
+			/* 	$('#delayTooltip').delayTooltip({
+					html: true,
+					placement: 'bottom',
+					title: html
+				});
+				 */
+				
+		  return this;
+		};
+			
+			 global.Page = page;
+			
+		})(this, jQuery);
+
+		$(function(){
+			'use strict';
+			
+		  var page = new window.Page().bootstrap();
+			//
+		});
+		
+		function tooltip(payid){
+			var html = payid+'<a target="_blank" href="#">copy</a>';
+			$('#delayTooltip').delayTooltip({
+				html: true,
+				placement: 'bottom',
+				title: html
+			});		
+		}
+		
+	</script>
+		<script type="text/javascript" src="${basePath}js/ZeroClipboard.js"></script>
+	<script>
+
+	function showcode(code){
+		// 定义一个新的复制对象
+		/* var clip = new ZeroClipboard( document.getElementByName("copy"), {
+		  moviePath: "ZeroClipboard.swf"
+		} );
+
+		// 复制内容到剪贴板成功后的操作
+		clip.on( 'complete', function(client, args) {
+		   alert("复制成功，复制内容为："+ args.text);
+		} ); */
+		alert(code);
+	}
+
+	
+
+	 
+
+	
+	</script>
+
+
+
+</body>
+</html>

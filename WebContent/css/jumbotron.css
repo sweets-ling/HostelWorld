@@ -1,0 +1,73 @@
+/* Move down content because we have a fixed navbar that is 50px tall */
+body {
+  padding-top: 50px;
+  padding-bottom: 20px;
+}
+
+.divcss {
+    width:290px;height:500px; overflow-y:scroll; border:1px solid #CCCCCC;
+    padding: 20px;
+    cursor:pointer;
+}
+.rdivcss {
+    width:250px;height:500px; overflow-y:scroll; border:1px solid #CCCCCC;
+    padding: 20px;
+    cursor:pointer;
+}
+.cdivcss {
+    width:240px;height:500px; overflow-y:scroll; border:1px solid #CCCCCC;
+    padding: 20px;
+    cursor:pointer;
+}
+.qdivcss {
+    width:300px;height:300px; overflow-y:scroll; border:1px solid #CCCCCC;
+    padding: 20px;
+    cursor:pointer;
+}
+.udivcss {
+    width:240px;height:360px; overflow-y:scroll; border:1px solid #CCCCCC;
+    padding: 20px;
+    cursor:pointer;
+}
+.formdivcss {
+    width:550px;height:500px; overflow-y:scroll; border:1px solid #CCCCCC;
+    padding: 20px;
+}
+.libgcl {
+	background-color: #DEEFFF;
+}
+
+#droleuser li li:hover ,#roleuser li li:hover ,#user li:hover,#role li:hover,#permission li:hover{
+	background-color: #F7F7F7;
+}
+
+.clicked {
+	
+}
+.clicked:hover {
+	background-color: #F7F7F7;
+}
+.rolestyle {
+	
+}
+
+#rolelist li:hover {
+	background-color: #F7F7F7;
+}
+
+#departmentlist li:hover {
+	background-color: #F7F7F7;
+}
+
+#ownedrole li:hover {
+	background-color: #F7F7F7;
+}
+
+#activeflows li:hover {
+	background-color: #F7F7F7;
+}
+
+#allflows li:hover {
+	background-color: #F7F7F7;
+}
+

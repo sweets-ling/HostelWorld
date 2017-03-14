@@ -1,0 +1,28 @@
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	<div class="col-md-offset-1">
+		<div class="navbar-innner">
+			<a class="navbar-brand" href="#">中国铁塔</a>
+		</div>
+
+		<div class="navbar-collapse collapse">
+			<ul class="nav navbar-nav">
+
+
+				<li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">设备管理<b class="caret"></b></a>
+					<ul class="dropdown-menu">
+						<li><a href="${basePath}device/searchIni">查询设备</a></li>
+						<li><a href="${basePath}device/addDeviceIni">添加设备</a></li>
+						<li class="divider"></li>
+						<li><a href="${basePath}device/deviceDataList">实时数据-弃用</a></li>
+						<li class="divider"></li>
+					</ul></li>
+
+
+			</ul>
+			<form action="${basePath}userLogin" method="post" class="navbar-form navbar-right" role="form">
+				<button type="submit" class="btn btn-success">退出</button>
+			</form>
+
+		</div>
+	</div>
+</div>

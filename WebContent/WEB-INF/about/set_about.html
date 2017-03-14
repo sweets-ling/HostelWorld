@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>图文介绍设置</title>
+
+<link href="${basePath}insp/css/bootstrap.css" rel="stylesheet">
+
+
+<link href="${basePath}insp/css/bootstrap.min.css" rel="stylesheet">
+<link href="${basePath}insp/font-awesome/css/font-awesome.css"
+	rel="stylesheet">
+
+<!-- Toastr style -->
+<link href="${basePath}insp/css/plugins/toastr/toastr.min.css"
+	rel="stylesheet">
+
+<!-- Gritter -->
+<link href="${basePath}insp/js/plugins/gritter/jquery.gritter.css"
+	rel="stylesheet">
+
+<link href="${basePath}insp/css/animate.css" rel="stylesheet">
+<link href="${basePath}insp/css/style.css" rel="stylesheet">
+
+<link href="${basePath}bootstrap/css/bootstrap-datetimepicker.min.css"
+	rel="stylesheet">
+<link href="${basePath}bootstrap/css/bootstrapValidator.css"
+	rel="stylesheet">
+
+
+
+
+</head>
+
+<body>
+	<div id="wrapper">
+		<#include "/WEB-INF/common/slide.html">
+
+
+		<div id="page-wrapper" class="gray-bg">
+			<div class="row border-bottom"><#include
+				"/WEB-INF/common/head.html"></div>
+
+			<div class="wrapper wrapper-content animated fadeIn">
+
+
+				<!-- 偏移量在修改 -->
+				<div class="col-sm-offset-0.5">
+				
+				
+				<ul id="myTab" class="nav nav-tabs">
+   <li class="active">
+      <a href="#setAboutForm" data-toggle="tab">
+         关于我们图文介绍
+      </a>
+   </li>
+   <li><a href="#setShareForm" data-toggle="tab">分享图文介绍</a></li>
+  
+</ul>
+
+
+<div id="myTabContent" class="tab-content">
+   <div class="tab-pane fade in active" id="setAboutForm" >
+     <div class="row" style=" padding-top:50px">
+     
+     
+     </div>
+   <div class="col-md-7">
+   <form id="aboutform" method="post" class="form-horizontal"
+								action="saveAbout">
+
+								<div class="form-group">
+									<label for="img1" class="col-md-2 control-label">图片</label>
+									<div class="col-md-8">
+										<input id="fileToUpload1" type="file" size="65"
+											style="display: none;" name="fileToUpload1" class="input"
+											onchange="img1.value=value"> <input name="picture"
+											id="img1" value="${about.picture}"
+											style="color: green;border: 1px solid green"> <input
+											type=button value="浏览..." onclick=fileToUpload1.click()
+											style="border: 1px solid green"> <input type=button
+											value="上传" onclick="ajaxFileUpload('1')"
+											style="border: 1px solid green">
+									</div>
+									 <img id="viewImg1" src="${basePath}/upload_img/${about.picture}" class="text-center" style="width:150px;height:250px;"/>
+
+
+									<div class="col-md-7"></div>
+								</div>
+
+
+
+								<div class="form-group">
+									<label for="name" class="col-md-2 control-label" >文字描述</label>
+									<div class="col-md-4">
+						
+											<textarea id="describe" name="describe"  type="text"  class="form-control" rows="5" 
+									style="width: 200%">${about.describe}</textarea>
+									</div>
+									<div class="col-md-7"></div>
+								</div>
+
+
+
+								<div class="form-group">
+									<div class="col-md-2 col-sm-offset-1">
+										<button type="submit" class="btn btn-primary">提交</button>
+									</div>
+								</div>
+							</form>
+   
+   
+   
+   </div>
+   
+     	
+   </div>
+   <div class="tab-pane fade" id="setShareForm">
+   <div class="row" style=" padding-top:50px"></div>
+   <div class="col-md-7">
+   
+    <form id="shareForm" method="post" class="form-horizontal"
+								action="saveShare">
+
+								<div class="form-group">
+									<label for="img2" class="col-md-2 control-label">图片</label>
+									<div class="col-md-8">
+										<input id="fileToUpload2" type="file" size="65"
+											style="display: none;" name="fileToUpload2" class="input"
+											onchange="img2.value=value"> <input name="picture"
+											id="img2" value="${share.picture}"
+											style="color: green;border: 1px solid green"> <input
+											type=button value="浏览..." onclick=fileToUpload2.click()
+											style="border: 1px solid green"> <input type=button
+											value="上传" onclick="ajaxFileUpload('2')"
+											style="border: 1px solid green">
+									</div>
+									<br> <img id="viewImg2" src="${basePath}/upload_img/${share.picture}" class="text-center" style="width:150px;height:250px;"/>
+
+
+									<div class="col-md-7"></div>
+								</div>
+
+
+
+								<div class="form-group">
+									<label for="name" class="col-md-2 control-label" >文字描述</label>
+									<div class="col-md-4">
+									
+											<textarea id="describe" name="describe"  type="text"  class="form-control" rows="5" 
+									style="width: 200%">${share.describe}</textarea>
+									</div>
+									<div class="col-md-7"></div>
+								</div>
+
+
+
+								<div class="form-group">
+									<div class="col-md-2 col-sm-offset-1">
+										<button type="submit" class="btn btn-primary">提交</button>
+									</div>
+								</div>
+							</form>
+   
+   
+   </div>
+   
+   </div>
+
+</div>
+
+
+
+
+
+				</div>
+
+				<div class="footer">
+					<div class="pull-right">
+						10GB of <strong>250GB</strong> Free.
+					</div>
+					<div>
+						<strong>Copyright</strong> Example Company &copy; 2014-2015
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+
+
+<!-- Mainly scripts -->
+	<script src="${basePath}insp/js/jquery-2.1.1.js"></script>
+
+	<!-- Mainly scripts -->
+	<script src="${basePath}insp/js/jquery-2.1.1.js"></script>
+	<script src="${basePath}insp/js/bootstrap.min.js"></script>
+	<script src="${basePath}insp/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+	<script src="${basePath}insp/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+	<!-- Flot -->
+	<script src="${basePath}insp/js/plugins/flot/jquery.flot.js"></script>
+	<script src="${basePath}insp/js/plugins/flot/jquery.flot.tooltip.min.js"></script>
+	<script src="${basePath}insp/js/plugins/flot/jquery.flot.spline.js"></script>
+	<script src="${basePath}insp/js/plugins/flot/jquery.flot.resize.js"></script>
+	<script src="${basePath}insp/js/plugins/flot/jquery.flot.pie.js"></script>
+	<script src="${basePath}insp/js/plugins/flot/jquery.flot.symbol.js"></script>
+	<script src="${basePath}insp/js/plugins/flot/jquery.flot.time.js"></script>
+
+	<!-- Custom and plugin javascript -->
+	<script src="${basePath}insp/js/inspinia.js"></script>
+	<script src="${basePath}insp/js/plugins/pace/pace.min.js"></script>
+
+	<!-- Sparkline -->
+	<script src="${basePath}insp/js/plugins/sparkline/jquery.sparkline.min.js"></script>
+
+
+	<script src="../bootstrap/js/bootstrapValidator.js"></script>
+	<script type="text/javascript" src="../js/ajaxfileupload.js"></script>
+
+		<script>
+			function ajaxFileUpload(imgid) {
+
+				$.ajaxFileUpload({
+					url : 'uploadImg',
+					secureuri : false,
+					fileElementId : 'fileToUpload' + imgid,
+					dataType : 'json',
+					data : {
+						username : $("#username").val()
+					},
+					success : function(data, status) {
+
+						// 					var imgStr = "img" + imgid;
+						// 					var viewImgStr = "viewImg" + imgid;
+
+						// 					alert(imgStr);
+						if (imgid == '1') {
+							$('#img1').val(data.serverfileName);
+							$('#viewImg1').attr('src', data.picUrl);
+						}
+						if (imgid == '2') {
+							$('#img2').val(data.serverfileName);
+							$('#viewImg2').attr('src', data.picUrl);
+						}
+						if (imgid == '3') {
+							$('#img3').val(data.serverfileName);
+							$('#viewImg3').attr('src', data.picUrl);
+						}
+
+					},
+					error : function(data, status, e) {
+						alert('上传出错' + data.serverfileName);
+					}
+				})
+
+			}
+		</script>
+
+
+		<script>
+			$('.form_date').datetimepicker({
+				language : 'zh-CN',
+				weekStart : 1,
+				todayBtn : 1,
+				autoclose : 1,
+				todayHighlight : 1,
+				startView : 2,
+				minView : 2,
+				forceParse : 0
+			});//时间选择器的配置
+			$(document).ready(
+					function() {
+						// Generate a simple captcha
+						function randomNumber(min, max) {
+							return Math.floor(Math.random() * (max - min + 1)
+									+ min);
+						}
+						;
+						$('#captchaOperation').html(
+								[ randomNumber(1, 100), '+',
+										randomNumber(1, 200), '=' ].join(' '));
+
+						$('#addCourseform').bootstrapValidator({
+							//        live: 'disabled',
+							message : 'This value is not valid',
+							feedbackIcons : {
+								valid : 'glyphicon glyphicon-ok',
+								invalid : 'glyphicon glyphicon-remove',
+								validating : 'glyphicon glyphicon-refresh'
+							},
+							fields : {
+								cid : {
+									message : '课件内部编号，数字和大写字母组成',
+									validators : {
+										notEmpty : {
+											message : '此输入框不能为空。'
+										},
+										regexp : {
+											regexp : /^[a-zA-Z0-9_\.]+$/,
+											message : '编号由字母和数字组成,不支持其它字符。'
+										}
+									}
+								},
+								name : {
+									message : '课件名称，40个汉子以内',
+									validators : {
+										notEmpty : {
+											message : '此输入框不能为空。'
+										}
+
+									}
+								},
+								price : {
+									message : '课件价格',
+									validators : {
+										notEmpty : {
+											message : '此输入框不能为空。'
+										},
+										regexp : {
+											regexp : /^[0-9_\.]+$/,
+											message : '编号由数字组成,不支持其它字符。'
+										}
+									}
+								},
+								size : {
+									message : '课件大小，单位M',
+									validators : {
+										notEmpty : {
+											message : '此输入框不能为空。'
+										},
+										regexp : {
+											regexp : /^[0-9_\.]+$/,
+											message : '编号由数字组成,不支持其它字符。'
+										}
+									}
+								},
+								decribe : {
+									message : '课件大小，单位M',
+									validators : {
+										notEmpty : {
+											message : '此输入框不能为空。'
+										},
+									}
+								},
+
+							}
+						});
+
+					});
+		</script>
+		<!--底部分页的 -->
+</body>
+</html>

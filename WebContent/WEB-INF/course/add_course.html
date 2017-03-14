@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>新建课件</title>
+
+<link href="${basePath}insp/css/bootstrap.css" rel="stylesheet">
+
+
+<link href="${basePath}insp/css/bootstrap.min.css" rel="stylesheet">
+<link href="${basePath}insp/font-awesome/css/font-awesome.css" rel="stylesheet">
+
+<!-- Toastr style -->
+<link href="${basePath}insp/css/plugins/toastr/toastr.min.css" rel="stylesheet">
+
+<!-- Gritter -->
+<link href="${basePath}insp/js/plugins/gritter/jquery.gritter.css" rel="stylesheet">
+
+<link href="${basePath}insp/css/animate.css" rel="stylesheet">
+<link href="${basePath}insp/css/style.css" rel="stylesheet">
+
+<link href="${basePath}bootstrap/css/bootstrap-datetimepicker.min.css" rel="stylesheet">
+<link href="${basePath}bootstrap/css/bootstrapValidator.css" rel="stylesheet">
+
+
+
+
+</head>
+
+<body>
+	<div id="wrapper">
+		<#include "/WEB-INF/common/slide.html">
+
+
+		<div id="page-wrapper" class="gray-bg">
+			<div class="row border-bottom"><#include "/WEB-INF/common/head.html"></div>
+
+			<div class="wrapper wrapper-content animated fadeIn">
+
+
+				<!-- 偏移量在修改 -->
+				<div class="col-sm-offset-0.5">
+					<!-- Example row of columns -->
+					<#if operation = 'add' >
+
+					<h2 class="sub-header">新建课件</h2>
+					<#elseif operation = 'update'>
+					<h2 class="sub-header">更新课件</h2>
+					<#elseif operation = 'update'>
+					<h2 class="sub-header">课件详情</h2>
+					</#if>
+					<hr>
+
+
+
+
+					<#if operation = 'add' >
+					<form id="addCourseform" method="post" class="form-horizontal" action="addCourse">
+						<#elseif operation = 'update'>
+						<form id="addCourseform" method="post" class="form-horizontal" action="updateCourse">
+							</#if> <input class="hidden" id="id" name="id" value="${data.id}" />
+
+							<div class="form-group">
+								<label for="cid" class="col-md-1 control-label">课件编号</label>
+								<div class="col-md-4">
+									<input name="cid" type="text" value="${data.cid}" class="form-control" id="cid">
+								</div>
+
+								<div class="col-md-7"></div>
+							</div>
+
+							<div class="form-group">
+								<label for="name" class="col-md-1 control-label">课件名称</label>
+								<div class="col-md-4">
+									<input name="name" type="text" value="${data.name}" class="form-control" id="name">
+								</div>
+								<div class="col-md-7"></div>
+							</div>
+							<div class="form-group">
+								<label for="csize" class="col-md-1 control-label">课件大小</label>
+								<div class="col-md-4">
+									<input name="size" type="text" value="${data.csize}" class="form-control" id="size">
+								</div>
+								<div class="col-md-7"></div>
+							</div>
+							<div class="form-group">
+								<label for="price" class="col-md-1 control-label">课件价格(元)</label>
+								<div class="col-md-4">
+									<input name="price" type="text" value="${data.price}" class="form-control" id="price">
+								</div>
+
+								<div class="col-md-7"></div>
+							</div>
+							<div class="form-group">
+								<label for="price" class="col-md-1 control-label">课件状态</label>
+								<div class="col-md-4">
+									<select class="form-control" id="status" name="status">
+										<option value="0">演示课件</option>
+										<option value="1">限时免费</option>
+										<option value="2">收费课件</option>
+									</select> <input name="status_value" id="status_value" type="hidden" value="${data.status}">
+
+								</div>
+								<div class="col-md-7"></div>
+							</div>
+							<!-- 							<div class="form-group">
+								<label for="describe" class="col-md-1 control-label">文字描述</label>
+								<div class="col-md-4">
+									<textarea cols="2" rows="6" name="describe" class="form-control" id="describe">${data.describe}</textarea>
+								</div>
+								<div class="col-md-7"></div>
+							</div> -->
+							<div class="form-group">
+								<label for="describe" class="col-md-1 control-label">图文描述</label>
+								<div class="col-md-11">
+									<textarea id="editor" cols="2" rows="6" name="describe" class="form-control" id="describe">${data.describe}</textarea>
+								</div>
+								<div class="col-md-7"></div>
+							</div>
+
+
+							<div class="form-group">
+								<label for="img1" class="col-md-1 control-label">图片1</label>
+								<!-- 								<div class="col-md-4"> -->
+								<!-- 									<input name="img1" type="text" value="${data.img1}" -->
+								<!-- 										class="form-control" id="img1"> -->
+								<!-- 								</div> -->
+								<div class="col-md-4">
+									<input id="fileToUpload1" type="file" size="65" style="display: none;" name="fileToUpload" class="input" onchange="img1.value=value">
+									<input name="img1" id="img1" value="${data.img1name}" style="color: green;border: 1px solid green"> <input type=button value="浏览..."
+										onclick=fileToUpload1.click() style="border: 1px solid green"> <input type=button value="上传" onclick="ajaxFileUpload('1')"
+										style="border: 1px solid green">
+								</div>
+								<br> <img id="viewImg1" src="${data.img1}" />
+
+
+								<div class="col-md-7"></div>
+							</div>
+
+
+							<div class="form-group">
+								<label for="img2" class="col-md-1 control-label">图片2</label>
+								<div class="col-md-4">
+									<input id="fileToUpload2" type="file" size="65" style="display: none;" name="fileToUpload" class="input" onchange="img2.value=value">
+									<input name="img2" id="img2" value="${data.img2name}" style="color: green;border: 1px solid green"> <input type=button value="浏览..."
+										onclick=fileToUpload2.click() style="border: 1px solid green"> <input type=button value="上传" onclick="ajaxFileUpload('2')"
+										style="border: 1px solid green">
+								</div>
+								<br> <img id="viewImg2" src="${data.img2}">
+								<div class="col-md-7"></div>
+							</div>
+
+							<div class="form-group">
+								<label for="img3" class="col-md-1 control-label">图片3</label>
+								<div class="col-md-4">
+									<input id="fileToUpload3" type="file" size="65" style="display: none;" name="fileToUpload" class="input" onchange="img3.value=value">
+									<input name="img3" id="img3" value="${data.img3name}" style="color: green;border: 1px solid green"> <input type=button value="浏览..."
+										onclick=fileToUpload3.click() style="border: 1px solid green"> <input type=button value="上传" onclick="ajaxFileUpload('3')"
+										style="border: 1px solid green">
+								</div>
+								<br> <img id="viewImg3" src="${data.img3}">
+								<!-- 									style="display:none;" -->
+								<div class="col-md-7"></div>
+							</div>
+
+
+
+
+
+							<div class="form-group">
+								<div class="col-md-2 col-sm-offset-1">
+
+									<#if operation = 'add' >
+									<button type="submit" class="btn btn-primary">创建新课件</button>
+									<#elseif operation = 'update'>
+									<button type="submit" class="btn btn-primary">更新课件</button>
+									</#if>
+								</div>
+
+							</div>
+
+
+						</form>
+				</div>
+
+
+
+
+			</div>
+
+			<#include "/WEB-INF/common/footer.html">
+		</div>
+	</div>
+
+	</div>
+
+
+
+
+
+	<!-- Mainly scripts -->
+	<script src="${basePath}insp/js/jquery-2.1.1.js"></script>
+
+	<!-- Mainly scripts -->
+	<script src="${basePath}insp/js/jquery-2.1.1.js"></script>
+	<script src="${basePath}insp/js/bootstrap.min.js"></script>
+	<script src="${basePath}insp/js/plugins/metisMenu/jquery.metisMenu.js"></script>
+	<script src="${basePath}insp/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+	<!-- Flot -->
+	<script src="${basePath}insp/js/plugins/flot/jquery.flot.js"></script>
+	<script src="${basePath}insp/js/plugins/flot/jquery.flot.tooltip.min.js"></script>
+	<script src="${basePath}insp/js/plugins/flot/jquery.flot.spline.js"></script>
+	<script src="${basePath}insp/js/plugins/flot/jquery.flot.resize.js"></script>
+	<script src="${basePath}insp/js/plugins/flot/jquery.flot.pie.js"></script>
+	<script src="${basePath}insp/js/plugins/flot/jquery.flot.symbol.js"></script>
+	<script src="${basePath}insp/js/plugins/flot/jquery.flot.time.js"></script>
+
+	<!-- Custom and plugin javascript -->
+	<script src="${basePath}insp/js/inspinia.js"></script>
+	<script src="${basePath}insp/js/plugins/pace/pace.min.js"></script>
+
+	<!-- Sparkline -->
+	<script src="${basePath}insp/js/plugins/sparkline/jquery.sparkline.min.js"></script>
+
+
+	<script src="../bootstrap/js/bootstrapValidator.js"></script>
+	<script type="text/javascript" src="../js/ajaxfileupload.js"></script>
+	<script type="text/javascript" src="../ckeditor/ckeditor.js"></script>
+
+	<script>
+		function ajaxFileUpload(imgid) {
+
+			$.ajaxFileUpload({
+				url : 'uploadImg',
+				secureuri : false,
+				fileElementId : 'fileToUpload' + imgid,
+				dataType : 'json',
+				data : {
+					username : $("#username").val()
+				},
+				success : function(data, status) {
+
+					// 					var imgStr = "img" + imgid;
+					// 					var viewImgStr = "viewImg" + imgid;
+
+					// 					alert(imgStr);
+					if (imgid == '1') {
+						$('#img1').val(data.serverfileName);
+						$('#viewImg1').attr('src', data.picUrl);
+					}
+					if (imgid == '2') {
+						$('#img2').val(data.serverfileName);
+						$('#viewImg2').attr('src', data.picUrl);
+					}
+					if (imgid == '3') {
+						$('#img3').val(data.serverfileName);
+						$('#viewImg3').attr('src', data.picUrl);
+					}
+
+				},
+				error : function(data, status, e) {
+					alert('上传出错' + data.serverfileName);
+				}
+			})
+
+		}
+
+		$(document).ready(
+
+				function() {
+					// Generate a simple captcha
+					// 					alert("kk");
+
+					var value = document.getElementById("status_value").value;
+					$("#status").find("option[value='" + value + "']").attr(
+							"selected", true);
+					CKEDITOR.replace('editor');
+
+				});
+	</script>
+
+
+
+
+</body>
+</html>

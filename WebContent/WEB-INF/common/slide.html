@@ -1,0 +1,83 @@
+<nav class="navbar-default navbar-static-side" role="navigation">
+	<div class="sidebar-collapse">
+		<ul class="nav metismenu" id="side-menu">
+			<li class="nav-header">
+				<div class="dropdown profile-element">
+					<span> <a href="../homepage/index"><img href="../homepage/index" alt="image" class="img-circle" src="${basePath}insp/img/photogray.jpg" width="80dp" ,height="80dp" /></a>
+					</span> <a data-toggle="dropdown" class="dropdown-toggle" > <span class="clear"> <span class="block m-t-xs"> <strong
+								class="font-bold">&nbsp&nbsp&nbsp${userName}</strong></a>
+
+				</div>
+				 <a href="../homepage/index"><div class="logo-element">SUN</div></a>
+			</li>
+
+
+			<li id="course"><a href="#"><i class="fa fa-envelope"></i> <span class="nav-label">课件管理</span> <span class="fa arrow"></span></a>
+				<ul id="coursesecond" class="nav nav-second-level collapse">
+					<li id="_course_addCourseIni"><a href="../course/addCourseIni">新建课件</a></li>
+					<li id="_course_list"><a href="../course/list">课件列表</a></li>
+					<li id="_course_listFile"><a href="../course/listFile">课件销售情况</a></li>
+				</ul></li>
+
+			<li id="purchase"><a href="#"><i class="fa fa-envelope"></i> <span class="nav-label">销售管理</span> <span class="fa arrow"></span></a>
+				<ul id="purchasesecond" class="nav nav-second-level collapse">
+					<li id="_purchase_add"><a href="../purchase/add">新增购买</a></li>
+					<li id="_purchase_genActiceCodeIni"><a href="../purchase/genActiceCodeIni">新增激活码</a></li>
+					<li id="_purchase_codeList"><a href="../purchase/codeList">激活码列表</a></li>
+					<li id="_purchase_list"><a href="../purchase/list">购买/激活记录</a></li>
+				</ul></li>
+
+			<li id="question"><a href="#"><i class="fa fa-envelope"></i> <span class="nav-label">人工翻译</span><span class="fa arrow"></a>
+				<ul id="questionsecond" class="nav nav-second-level collapse">
+					<li id="_question_answerListType0"><a href="../question/answerListType0">未翻译问题</a></li>
+					<li id="_question_answerListType1"><a href="../question/answerListType1">翻译历史</a></li>
+					<li id="_price_priceList"><a href="../price/priceList">翻译价格</a></li>
+				</ul></li>
+
+			<li id="favorite"><a href="../favorite/list"><i class="fa fa-envelope"></i> <span class="nav-label">收藏列表</span> </a></li>
+
+			<li id="ad"><a href="#"><i class="fa fa-envelope"></i> <span class="nav-label">广告管理</span> <span class="fa arrow"></span></a>
+				<ul id="adsecond" class="nav nav-second-level collapse">
+					<li id="_ad_count"><a href="../ad/count">点击统计</a></li>
+					<li id="_ad_set"><a href="../ad/set">广告设置</a></li>
+				</ul></li>
+
+
+
+
+
+
+			<li id="behavior"><a href="../behavior/list"><i class="fa fa-envelope"></i> <span class="nav-label">行为统计</span> </a></li>
+
+
+			<li id="user"><a href="#"><i class="fa fa-envelope"></i> <span class="nav-label">用户信息</span><span class="fa arrow"></a>
+				<ul id="usersecond" class="nav nav-second-level collapse">
+					<li id="_user_userListType1"><a href="../user/userListType1">正常用户</a></li>
+					<li id="_user_userListType0"><a href="../user/userListType0">屏蔽用户</a></li>
+					<li id="_device_list"><a href="../device/list">设备标识</a></li>
+				</ul></li> <#if userType == '0'>
+			<li id="admin"><a href="../admin/adminList"><i class="fa fa-envelope"></i> <span class="nav-label">后台用户</span><span></a></li> </#if>
+
+			<li id="system"><a href="#"><i class="fa fa-flask"></i> <span class="nav-label">系统信息</span><span class="fa arrow"></a>
+				<ul id="systemsecond" class="nav nav-second-level collapse">
+					<li id="_about_set"><a href="../about/set">图文介绍 </a></li>
+					<li id="_suggest_list"><a href="../suggest/list">意见反馈</a></li>
+				</ul></li>
+		</ul>
+	</div>
+	<input id="slidename" class="hidden" value="${slide}"> <input id="slidesecond" class="hidden" value="${slidesecond}">
+</nav>
+
+<script>
+	/* getUnAnswerNum(); */
+	function myfun() {
+		var slide = $('#slidename').val();
+		var slidesecond = $('#slidesecond').val();
+		$(slide).addClass("active");
+		$(slidesecond).addClass("active");
+		slide = slide + "second";
+		$(slide).addClass("in");
+	}
+	window.onload = myfun;
+</script>
+

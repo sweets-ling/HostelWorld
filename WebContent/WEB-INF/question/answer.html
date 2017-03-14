@@ -1,0 +1,148 @@
+
+
+
+<!DOCTYPE html>
+
+<html style="height: 239px; ">
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="${basePath}insp/css/bootstrap.css" rel="stylesheet">
+<link href="${basePath}insp/css/bootstrap.min.css" rel="stylesheet">
+<link href="${basePath}insp/font-awesome/css/font-awesome.css" rel="stylesheet">
+	
+
+</head>
+<body>
+	
+
+	<div class="table-responsive">
+	<table class="table table-bordered">
+	<tbody>
+					<tr>
+					<td class="col-md-2">
+						提问人
+						</td>
+						<td>
+							${node.qstName}
+						</td>
+					</tr>
+					<tr >
+						<td>
+							提问时间
+						</td>
+						<td>
+							${node.qstTime}
+						</td>
+					</tr>
+					<tr >
+						<td>
+							回答者
+						</td>
+						<td>
+							${aswName}
+						</td>
+					</tr>
+					
+					
+					<tr>
+						<td>
+							翻译内容
+						</td>
+						<td>
+						<#if node.qstType= '0'	>	
+								${node.qstCon} 
+						 <#elseif node.qstType= '1'>			
+								<div id="photosDemo" class="photos-demo">
+        					 <img width:200px layer-src="http://minlan.b0.upaiyun.com${node.qstCon}" layer-pid="" src="http://minlan.b0.upaiyun.com${node.qstCon}" alt="" style="height: 93px; width: 136px; ">  
+   							 </div>  
+   						<#elseif node.qstType= '2'>	
+   						<audio preload="auto" controls>
+							<source src="http://minlan.b0.upaiyun.com${node.qstCon}">	
+						</#if>	
+										
+							
+						</td>
+					</tr>
+				
+					<tr>
+						<td>
+							翻译方式
+						</td>
+						<td>
+						<#if node.transType= '0'>	
+						  老挝-汉语
+						 <#elseif node.transType= '1'>
+						  泰语-汉语
+						  </#if>	
+						</td>
+					</tr>
+					<tr>
+						<td>
+							翻译
+							</td>
+							
+							<td>
+						
+							<form id="updateAnswerform" method="post" class="form-horizontal" action="#" onsubmit="return saveAnswer();" style="width: 307px; "> 		
+                             <div class="col-md-10" ">
+						       <input type="hidden" id="aid" name="aid" value="${node.id}" />
+							   <textarea name="answer"  value="" class="form-control" id="answer" style="height: 66px;cols:40; rows:4;">${node.aswCon}</textarea>
+							   <input type="submit" value="提交" />
+							   <p id="result"></p>
+							</div >
+
+							</form>
+							</td>
+							</tr>
+							</tbody>
+</table>
+</div>
+</div>
+	<script src="${basePath}insp/js/jquery-2.1.1.js"></script>
+	<script src="${basePath}insp/js/bootstrap.min.js"></script>
+	<script src="${basePath}js/audioplayer.js"></script>
+	
+	<script src="${basePath}layer/layer.js"></script>
+
+
+
+
+	<script>
+		;
+		!function() {
+
+			//页面一打开就执行，放入ready是为了layer所需配件（css、扩展模块）加载完毕
+			layer.ready(function() {
+
+				//使用相册
+				layer.photos({
+					photos : '#photosDemo'
+				});
+			});
+		}();
+
+		function saveAnswer() {
+			// jquery 表单提交 
+			$.post("answer", {
+				id : $("#aid").val(),
+				answer : $("#answer").val()
+			},
+
+			function(data) {
+				/////
+				$("#result").text("回答成功！");
+				//   		    var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+				//         parent.layer.close(index);
+			}
+
+			);
+
+			return false; // 阻止表单自动提交事件
+
+		}
+	</script>
+
+</body>
+</html>

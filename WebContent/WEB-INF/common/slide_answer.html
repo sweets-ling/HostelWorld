@@ -1,0 +1,36 @@
+<nav class="navbar-default navbar-static-side" role="navigation">
+	<div class="sidebar-collapse">
+		<ul class="nav metismenu" id="side-menu">
+			<li class="nav-header">
+				<div class="dropdown profile-element">
+					<span> <a href="../cs/answerListType0"><img href="../homepage/index" alt="image" class="img-circle"
+							src="${basePath}insp/img/photogray.jpg" width="80dp" ,height="80dp" /></a>
+					</span> <a data-toggle="dropdown" class="dropdown-toggle"> <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">&nbsp&nbsp&nbsp${userName}</strong></a>
+
+				</div> <a href="../cs/answerListType0"><div class="logo-element">SUN</div></a>
+			</li>
+			<li id="question"><a href="#"><i class="fa fa-envelope"></i> <span class="nav-label">人工翻译</span><span class="fa arrow"></a>
+				<ul id="questionsecond" class="nav nav-second-level collapse">
+					<li id="_question_answerListType0"><a href="../cs/answerListType0">未翻译问题</a></li>
+					<li id="_question_answerListType1"><a href="../cs/answerListType1">翻译历史</a></li>
+				</ul></li>
+			
+			<li id="_admin_showMyInfo"><a href="../admin/showMyInfo"><i class="fa fa-envelope"></i> <span class="nav-label">我的信息</span> </a></li>
+		</ul>
+	</div>
+	<input id="slidename" class="hidden" value="${slide}"> <input id="slidesecond" class="hidden" value="${slidesecond}">
+</nav>
+
+<script>
+	/* getUnAnswerNum(); */
+	function myfun() {
+		var slide = $('#slidename').val();
+		var slidesecond = $('#slidesecond').val();
+		$(slide).addClass("active");
+		$(slidesecond).addClass("active");
+		slide = slide + "second";
+		$(slide).addClass("in");
+	}
+	window.onload = myfun;
+</script>
+

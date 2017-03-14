@@ -1,0 +1,98 @@
+
+
+<div class="text-center">
+					<ul class="pagination">
+<!--                      如果页码大于1，可以返回上一页 -->
+						<#if pageNumber gt 1>  
+						<li><a href="?pageNumber=${pageNumber-1}">&laquo;</a></li>
+						 <#else>
+						<li class="disabled"><a href="#">&laquo;</a></li>
+						 </#if>
+						 
+						 
+                       <!-- 当前页码小于3页	-->
+						<#if  pageNumber lt 3 >
+							<#if  countPage lte 5 >
+						
+							<#list 1..countPage as x> 
+								<#if x==pageNumber>
+ 								<li class="active"><a href="?pageNumber=${x}">${x}</a></li>
+ 								</#if>
+ 								<#if x!=pageNumber>
+ 								 <li ><a href="?pageNumber=${x}">${x}</a></li>
+						        </#if>
+							 </#list>
+							   </#if>
+							<#if  countPage gt 5 >
+						
+							<#list 1..5 as x> 
+								<#if x==pageNumber>
+ 								<li class="active"><a href="?pageNumber=${x}">${x}</a></li>
+ 								</#if>
+ 								<#if x!=pageNumber>
+ 								 <li ><a href="?pageNumber=${x}">${x}</a></li>
+						        </#if>
+							 </#list>
+							   </#if>
+						 </#if> 
+						 
+<!-- 				当前页面大于第三页，则选中点在中间		 在中间，没到最后5页-->
+						<#if pageNumber gte 3 &&  countPage lte 5>
+							<#list (pageNumber-2)..countPage as x> 
+								<#if x==pageNumber>
+ 								<li class="active"><a href="?pageNumber=${x}">${x}</a></li>
+ 								</#if>
+ 								<#if x!=pageNumber>
+ 								 <li ><a href="?pageNumber=${x}">${x}</a></li>
+						        </#if>
+							 </#list>
+						 </#if> 
+
+
+						<#if pageNumber gte 3 && (pageNumber+2) lte countPage && countPage gt 5>
+							<#list (pageNumber-2)..(pageNumber+2) as x> 
+								<#if x==pageNumber>
+ 								<li class="active"><a href="?pageNumber=${x}">${x}</a></li>
+ 								</#if>
+ 								<#if x!=pageNumber>
+ 								 <li ><a href="?pageNumber=${x}">${x}</a></li>
+						        </#if>
+							 </#list>
+						 </#if> 
+						 
+				
+						<#if pageNumber gte 3 && (pageNumber+2) gt countPage && countPage gt 5>
+							<#list (countPage-4)..countPage as x> 
+								<#if x==pageNumber>
+ 								<li class="active"><a href="?pageNumber=${x}">${x}</a></li>
+ 								</#if>
+ 								<#if x!=pageNumber>
+ 								 <li ><a href="?pageNumber=${x}">${x}</a></li>
+						        </#if>
+							 </#list>
+						 </#if> 
+						 
+							 
+<!-- 						到了最后5页  -->
+<!-- 						<#if countPage gt 5 && (pageNumber+4) gt countPage > -->
+<!-- 							<#list (countPage-4)..countPage as x>  -->
+<!-- 								<#if x==pageNumber> -->
+<!--  								<li class="active"><a href="?pageNumber=${x}">${x}</a></li> -->
+<!--  								</#if> -->
+<!--  								<#if x!=pageNumber> -->
+<!--  								 <li ><a href="?pageNumber=${x}">${x}</a></li> -->
+<!-- 						        </#if> -->
+<!-- 							 </#list> -->
+<!-- 						 </#if>  -->
+							 
+						
+						 
+<!-- 						 最后一页后面的下一页的标识  -->
+	                     <#if pageNumber lt countPage>
+						<li><a href="?pageNumber=${pageNumber+1}">&raquo;</a></li>						
+						 <#else>
+						<li class="disabled"><a href="#">&raquo;</a></li>
+						 </#if>
+
+					</ul>
+				</div>

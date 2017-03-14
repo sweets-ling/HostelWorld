@@ -1,0 +1,101 @@
+
+
+
+<!DOCTYPE html>
+
+<html style="height: 239px; ">
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="${basePath}insp/css/bootstrap.css" rel="stylesheet">
+<link href="${basePath}insp/css/bootstrap.min.css" rel="stylesheet">
+<link href="${basePath}insp/font-awesome/css/font-awesome.css" rel="stylesheet">
+	
+
+</head>
+<body>
+	<div class="col-md-6"><h2 class="sub-header">翻译价格</h2>
+	<hr>
+
+	<div class="table-responsive">
+	<form id="updateAnswerform" method="post" class="form-horizontal" action="#" onsubmit="return saveAdmin();" style="width: 307px; "> 		
+                           
+                           
+                    <table class="table table-bordered">
+					<tbody>
+                           <tr>
+					<td class="col-md-2">
+						时间
+						</td>
+						<td>
+						   <input type="text" id="month" value="${node.month}" />个月
+						
+						</td>
+					</tr>
+					<tr >
+						<td>
+							价格
+						</td>
+						<td>
+							 <input type="text" id="price" value="${node.price}" />元
+						</td>
+					</tr>
+					
+					
+					<tr>
+						<td>
+							备注
+						</td>
+						<td>
+						 <textarea name="content"  value="" class="form-control" id="content" style="height: 66px;cols:40; rows:4;">${node.content}</textarea>
+						</td>
+
+					</tr>
+                            
+
+							</tbody>
+</table>
+							<div class="col-md-10" ">
+						       <input type="hidden" id="aid" name="aid" value="${id}" />
+							   <input type="submit" value="提交" />
+								<p id="result"></p>
+							</div >		
+</form>
+</div>
+</div>
+	<script src="${basePath}insp/js/jquery-2.1.1.js"></script>
+	<script src="${basePath}insp/js/bootstrap.min.js"></script>
+	<script src="${basePath}js/audioplayer.js"></script>
+	
+	<script src="${basePath}layer/layer.js"></script>
+
+
+	
+	
+	<script>
+	function saveAdmin() {  
+	    // jquery 表单提交 
+	  
+	     $.post("addorupdate",{month:$("#month").val(),price:$("#price").val(),content:$("#content").val(),id:$("#aid").val()} ,
+
+
+	    
+	    function(data){
+	    	/////
+			$("#result").text("保存成功！");
+			parent.window.location.reload();
+	         var index = parent.layer.getFrameIndex(window.name); //获取窗口索引
+	         parent.layer.close(index);
+	    	
+	    	 }
+	    
+	    ); 
+        return false; // 阻止表单自动提交事件
+
+	}  
+	
+	</script>
+
+</body>
+</html>
